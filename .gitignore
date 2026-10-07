@@ -1,0 +1,7 @@
+node_modules
+dist
+.DS_Store
+*.log
+.idea
+# Original CV upload; the published copy lives in public/
+/Salahaldin Tawafsha.pdf

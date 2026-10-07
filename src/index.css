@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-slate-50 font-sans text-slate-700 antialiased transition-colors duration-300 dark:bg-ink-950 dark:text-slate-300;
+    overflow-x: hidden;
+  }
+  ::selection {
+    @apply bg-cyan-400/30 text-slate-900 dark:text-white;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-50 dark:ring-offset-ink-950;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r from-cyan-500 to-violet-500 bg-clip-text text-transparent dark:from-accent-cyan dark:to-accent-violet;
+  }
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white/80 shadow-sm backdrop-blur transition duration-300 dark:border-ink-700/70 dark:bg-ink-900/70 dark:shadow-none;
+  }
+  .card-hover {
+    @apply hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-lg hover:shadow-cyan-500/5 dark:hover:border-cyan-400/40;
+  }
+  .chip {
+    @apply inline-flex items-center rounded-full border border-slate-200 bg-slate-100 px-3 py-1 font-mono text-xs text-slate-600 dark:border-ink-700 dark:bg-ink-800 dark:text-slate-300;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-cyan-500 to-violet-500 text-white shadow-lg shadow-cyan-500/20 hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-slate-300 text-slate-700 hover:border-cyan-400 hover:text-cyan-600 dark:border-ink-700 dark:text-slate-200 dark:hover:border-cyan-400 dark:hover:text-accent-cyan;
+  }
+  .bg-grid {
+    background-image: linear-gradient(to right, rgb(148 163 184 / 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(148 163 184 / 0.12) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-float, .animate-blink { animation: none; }
+}
