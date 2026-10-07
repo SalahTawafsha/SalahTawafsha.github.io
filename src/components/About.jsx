@@ -7,6 +7,7 @@ export default function About() {
     { icon: 'mapPin', label: 'Location', value: profile.contact.location },
     { icon: 'briefcase', label: 'Current role', value: 'Mobile Full-Stack Developer @ VNG International' },
     { icon: 'graduation', label: 'Education', value: `B.Sc. Computer Science, ${education.school}` },
+    { icon: 'passport', label: 'Work authorization', value: profile.workAuthorization.detail },
     { icon: 'globe', label: 'Languages', value: profile.languages.join(' · ') },
   ];
 

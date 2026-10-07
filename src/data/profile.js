@@ -19,6 +19,10 @@ export const profile = {
     githubHref: 'https://github.com/SalahTawafsha',
   },
   languages: ['Arabic', 'English'],
+  workAuthorization: {
+    badge: 'Brazilian citizen · Open to relocation',
+    detail: 'Brazilian citizen — no sponsorship needed for Brazil · Open to relocation worldwide',
+  },
   stats: [
     { value: '2+', label: 'Years experience' },
     { value: '4', label: 'Companies' },

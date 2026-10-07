@@ -52,7 +52,7 @@ export default function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
-            Based in {contact.location.split(', ').slice(-1)[0]}
+            Based in {contact.location.split(', ').slice(-1)[0]} · {profile.workAuthorization.badge}
           </div>
 
           <p className="reveal mt-6 font-mono text-sm text-cyan-600 dark:text-accent-cyan">Hi, my name is</p>

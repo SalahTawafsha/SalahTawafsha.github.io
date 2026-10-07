@@ -102,6 +102,13 @@ const paths = {
       <path d="M15 3h6v6M10 14 21 3" />
     </>
   ),
+  passport: (
+    <>
+      <rect x="4" y="2" width="16" height="20" rx="2" />
+      <circle cx="12" cy="10" r="3" />
+      <path d="M8 17h8" />
+    </>
+  ),
   briefcase: (
     <>
       <rect x="2" y="7" width="20" height="14" rx="2" />
