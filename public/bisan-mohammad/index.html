@@ -16,51 +16,60 @@ COLOUR and TYPE: deep wine ground, blush paper, antique gold; Pinyon Script name
 LAYOUT: one centred card on one screen: wreath + names, date, live countdown, then a small closing line
 */
 :root{color-scheme:light dark;
---bg:light-dark(#f6e9e4,#2a0f17);
---card:light-dark(#fffaf6,#3b1622);
---ink:light-dark(#4a1826,#f7e6e0);
---soft:light-dark(#8a5a63,#d8b7b4);
---gold:light-dark(#b08a3e,#d9b66a);
---wine:#6b2234;--leaf:light-dark(#7d8b5a,#9fae78);--rose:light-dark(#c9707f,#e095a1)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+--bg:#f6e9e4;--card:#fffaf6;--ink:#4a1826;--soft:#8a5a63;--gold:#b08a3e;--line:rgba(176,138,62,.55);
+--wine:#6b2234;--leaf:#7d8b5a;--rose:#c9707f;--done:#6b2234;
+--glow1:rgba(255,255,255,.67);--glow2:#e9c9c2;--shadow:rgba(107,34,52,.33);--hi:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){
+--bg:#2a0f17;--card:#3b1622;--ink:#f7e6e0;--soft:#d8b7b4;--gold:#d9b66a;--line:rgba(217,182,106,.55);
+--leaf:#9fae78;--rose:#e095a1;--done:#e095a1;--glow1:rgba(107,34,52,.33);--glow2:#1a080e;--shadow:rgba(0,0,0,.8);--hi:rgba(255,255,255,.06)}}
+:root[data-theme=dark]{color-scheme:dark;
+--bg:#2a0f17;--card:#3b1622;--ink:#f7e6e0;--soft:#d8b7b4;--gold:#d9b66a;--line:rgba(217,182,106,.55);
+--leaf:#9fae78;--rose:#e095a1;--done:#e095a1;--glow1:rgba(107,34,52,.33);--glow2:#1a080e;--shadow:rgba(0,0,0,.8);--hi:rgba(255,255,255,.06)}
+:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box;min-width:0}
 html,body{height:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Cormorant Garamond",Georgia,serif;overflow-x:clip;
-background-image:radial-gradient(ellipse at 50% -10%,light-dark(#ffffffaa,#6b223455),transparent 60%),radial-gradient(ellipse at 50% 110%,light-dark(#e9c9c2,#1a080e),transparent 60%)}
-main{min-height:100%;display:grid;place-items:center;padding:clamp(16px,4vw,48px) max(4vw,12px)}
-.card{position:relative;width:min(720px,100%);background:var(--card);border-radius:6px;padding:clamp(28px,5vw,56px) clamp(18px,5vw,56px) clamp(28px,4vw,44px);text-align:center;
-box-shadow:0 30px 80px -30px light-dark(#6b223455,#000c),0 2px 0 light-dark(#fff,#ffffff10) inset}
-.card::before,.card::after{content:"";position:absolute;pointer-events:none;border:1px solid var(--gold);border-radius:3px}
-.card::before{inset:12px;opacity:.7}.card::after{inset:17px;opacity:.35}
-.wreath{position:relative;width:min(440px,100%);aspect-ratio:1;margin:0 auto}
-.wreath svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.names{position:absolute;inset:0;display:grid;place-content:center;gap:0;padding:18%}
-.ar{font-family:"Aref Ruqaa",serif;font-size:clamp(22px,5vw,30px);color:var(--gold);line-height:1.2;direction:rtl;margin:0 0 4px}
-h1{margin:0;font:400 clamp(40px,10vw,68px)/1.05 "Pinyon Script",cursive;color:var(--ink);text-wrap:balance}
+body{margin:0;background-color:var(--bg);color:var(--ink);font:17px/1.55 "Cormorant Garamond",Georgia,serif;overflow-x:hidden;
+background-image:radial-gradient(ellipse at 50% -10%,var(--glow1),transparent 60%),radial-gradient(ellipse at 50% 110%,var(--glow2),transparent 60%)}
+main{position:relative;z-index:1;min-height:100%;display:flex;align-items:center;justify-content:center;padding:32px 16px}
+.card{position:relative;width:100%;max-width:720px;background:var(--card);border-radius:6px;padding:48px 40px 40px;text-align:center;
+box-shadow:0 30px 80px -30px var(--shadow),inset 0 2px 0 var(--hi)}
+.card:before,.card:after{content:"";position:absolute;pointer-events:none;border:1px solid var(--gold);border-radius:3px}
+.card:before{top:12px;right:12px;bottom:12px;left:12px;opacity:.7}
+.card:after{top:17px;right:17px;bottom:17px;left:17px;opacity:.35}
+.wreath{position:relative;width:100%;max-width:440px;margin:0 auto}
+.wreath:before{content:"";display:block;padding-top:100%}
+.wreath svg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:visible}
+.names{position:absolute;top:0;right:0;bottom:0;left:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18%}
+.ar{font-family:"Aref Ruqaa",serif;font-size:28px;color:var(--gold);line-height:1.2;direction:rtl;margin:0 0 4px}
+h1{margin:0;font-weight:400;font-size:64px;line-height:1.05;font-family:"Pinyon Script",cursive;color:var(--ink)}
 h1 .amp{display:block;font-size:.6em;color:var(--gold);line-height:1.1}
-.invite{margin:clamp(14px,3vw,22px) 0 2px;font-style:italic;color:var(--soft);font-size:18px}
-.date{margin:0;font-size:clamp(22px,4.4vw,30px);font-weight:500;letter-spacing:.02em}
+.invite{margin:20px 0 2px;font-style:italic;color:var(--soft);font-size:18px}
+.date{margin:0;font-size:30px;font-weight:500;letter-spacing:.02em}
 .date small{display:block;font-size:17px;color:var(--soft);font-weight:400;letter-spacing:0}
 .rule{display:block;width:140px;height:14px;margin:18px auto}
-.count{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(4px,1.6vw,14px);max-width:600px;margin:0 auto}
-.unit{padding:clamp(10px,2.4vw,16px) 4px;border-top:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-bottom:1px solid color-mix(in srgb,var(--gold) 55%,transparent)}
-.num{display:block;font:500 clamp(28px,7.6vw,54px)/1 "Cormorant Garamond",serif;font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
+.count{display:flex;justify-content:center;max-width:600px;margin:0 auto}
+.unit{flex:1 1 0;margin:0 6px;padding:14px 2px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.num{display:block;font-weight:500;font-size:50px;line-height:1;font-family:"Cormorant Garamond",serif;font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
 .lbl{display:block;margin-top:6px;font-size:15px;color:var(--soft)}
 .lbl .a{display:block;font-family:"Aref Ruqaa",serif;font-size:14px;color:var(--gold)}
-.done{display:none;font:400 clamp(34px,8vw,52px)/1.1 "Pinyon Script",cursive;color:var(--wine);margin:8px 0}
-:root[data-theme=dark] .done{color:var(--rose)}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .done{color:var(--rose)}}
+.done{display:none;font-weight:400;font-size:50px;line-height:1.1;font-family:"Pinyon Script",cursive;color:var(--done);margin:8px 0}
 .is-done .count{display:none}.is-done .done{display:block}
 .foot{margin:22px 0 0;font-size:16px;color:var(--soft)}
-.foot .ar{font-size:20px;margin:6px 0 0}
-.petals{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.foot .ar{display:block;font-size:20px;margin:6px 0 0}
+.petals{position:fixed;top:0;right:0;bottom:0;left:0;pointer-events:none;overflow:hidden;z-index:0}
 .petals i{position:absolute;top:-30px;width:12px;height:16px;border-radius:70% 0 70% 0;background:var(--rose);opacity:.55;animation:fall linear infinite}
-main{position:relative;z-index:1}
 @keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(540deg)}}
 .tick{animation:pop .5s ease}
 @keyframes pop{0%{opacity:.35;transform:translateY(-3px)}100%{opacity:1;transform:none}}
+/* SVG colours via CSS (old browsers ignore var() inside SVG attributes) */
+.s-gold{stroke:var(--gold)}.f-gold{fill:var(--gold)}.s-hi{stroke:#fff}
+.stop-leaf{stop-color:var(--leaf)}.stop-rose{stop-color:var(--rose)}.stop-wine{stop-color:var(--wine)}
 @media (prefers-reduced-motion:reduce){.petals{display:none}.tick{animation:none}}
-@media (max-width:600px){.names{padding:17%}.lbl{font-size:13px}.lbl .a{font-size:13px}}
+@media (max-width:600px){
+ main{padding:16px 10px}.card{padding:36px 18px 30px}
+ .ar{font-size:23px}h1{font-size:44px}.date{font-size:23px}.invite{margin-top:14px}
+ .names{padding:17%}.unit{margin:0 3px;padding:10px 1px}.num{font-size:28px}.lbl{font-size:13px}.lbl .a{font-size:13px}.done{font-size:36px}}
+@media (min-width:601px) and (max-width:860px){.num{font-size:40px}h1{font-size:56px}}
 </style>
 </head>
 <body>
@@ -68,18 +77,18 @@ main{position:relative;z-index:1}
 <main>
 <article class="card" id="card">
   <div class="wreath">
-    <svg viewBox="0 0 400 400" aria-hidden="true">
+    <svg xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" aria-hidden="true">
       <defs>
-        <linearGradient id="lf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--leaf)" stop-opacity=".95"/><stop offset="1" stop-color="var(--leaf)" stop-opacity=".6"/></linearGradient>
-        <radialGradient id="rs" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="var(--rose)"/><stop offset="1" stop-color="var(--wine)"/></radialGradient>
+        <linearGradient id="lf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" class="stop-leaf" stop-opacity=".95"/><stop offset="1" class="stop-leaf" stop-opacity=".6"/></linearGradient>
+        <radialGradient id="rs" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" class="stop-rose"/><stop offset="1" class="stop-wine"/></radialGradient>
         <path id="leaf" d="M0 0 C6 -9 18 -10 26 0 C18 10 6 9 0 0Z"/>
         <g id="rose">
           <circle r="15" fill="url(#rs)"/>
           <path d="M-9 -2 C-6 -11 6 -11 9 -3 C6 4 -4 6 -9 -2Z M-5 3 C-1 -4 6 -2 6 3 C3 8 -3 8 -5 3Z" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/>
         </g>
       </defs>
-      <circle cx="200" cy="200" r="170" fill="none" stroke="var(--gold)" stroke-width="1" opacity=".55"/>
-      <circle cx="200" cy="200" r="163" fill="none" stroke="var(--gold)" stroke-width=".6" opacity=".35" stroke-dasharray="2 5"/>
+      <circle cx="200" cy="200" r="170" fill="none" class="s-gold" stroke-width="1" opacity=".55"/>
+      <circle cx="200" cy="200" r="163" fill="none" class="s-gold" stroke-width=".6" opacity=".35" stroke-dasharray="2 5"/>
       <g id="leaves"></g>
       <g id="roses"></g>
     </svg>
@@ -93,9 +102,9 @@ main{position:relative;z-index:1}
   <p class="date">30 April 2027<small>Friday · الجمعة ٣٠ نيسان ٢٠٢٧</small></p>
 
   <svg class="rule" viewBox="0 0 140 14" aria-hidden="true">
-    <path d="M0 7H56M84 7H140" stroke="var(--gold)" stroke-width="1"/>
-    <path d="M70 1 L76 7 L70 13 L64 7Z" fill="none" stroke="var(--gold)"/>
-    <circle cx="70" cy="7" r="1.6" fill="var(--gold)"/>
+    <path d="M0 7H56M84 7H140" class="s-gold" stroke-width="1"/>
+    <path d="M70 1 L76 7 L70 13 L64 7Z" fill="none" class="s-gold"/>
+    <circle cx="70" cy="7" r="1.6" class="f-gold"/>
   </svg>
 
   <div class="count" role="timer" aria-live="off" aria-label="Countdown to the wedding">
@@ -123,11 +132,11 @@ main{position:relative;z-index:1}
     const r = 170 + (i % 2 ? 6 : -6);
     const rot = a + (i % 2 ? 125 : 55);
     const s = 0.9 + (i % 3) * 0.12;
-    L += `<use href="#leaf" fill="url(#lf)" transform="rotate(${a} 200 200) translate(200 ${200 - r}) rotate(${rot - a}) scale(${s})"/>`;
+    L += `<use xlink:href="#leaf" href="#leaf" fill="url(#lf)" transform="rotate(${a} 200 200) translate(200 ${200 - r}) rotate(${rot - a}) scale(${s})"/>`;
   }
   leaves.innerHTML = L;
   const rosePos = [[0, 1.15], [-12, .8], [12, .8], [180, 1.05], [168, .75], [192, .75]];
-  roses.innerHTML = rosePos.map(([a, s]) => `<use href="#rose" transform="rotate(${a} 200 200) translate(200 30) rotate(${-a}) scale(${s})"/>`).join("");
+  roses.innerHTML = rosePos.map(([a, s]) => `<use xlink:href="#rose" href="#rose" transform="rotate(${a} 200 200) translate(200 30) rotate(${-a}) scale(${s})"/>`).join("");
 
   // falling petals
   const P = document.querySelector(".petals");
