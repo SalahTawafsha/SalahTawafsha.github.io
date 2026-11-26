@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bisan & Mohammad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/*
+VOICE: tender, formal, celebratory — few hues, fine gold detail, lots of air
+IDEA: an engraved wedding invitation card, framed by an olive-and-rose wreath
+PICTURE: a hand-drawn SVG wreath of olive leaves and roses circling the couple's names
+COLOUR and TYPE: deep wine ground, blush paper, antique gold; Pinyon Script names, Aref Ruqaa Arabic, Cormorant body
+LAYOUT: one centred card on one screen: wreath + names, date, live countdown, then a small closing line
+*/
+:root{color-scheme:light dark;
+--bg:light-dark(#f6e9e4,#2a0f17);
+--card:light-dark(#fffaf6,#3b1622);
+--ink:light-dark(#4a1826,#f7e6e0);
+--soft:light-dark(#8a5a63,#d8b7b4);
+--gold:light-dark(#b08a3e,#d9b66a);
+--wine:#6b2234;--leaf:light-dark(#7d8b5a,#9fae78);--rose:light-dark(#c9707f,#e095a1)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Cormorant Garamond",Georgia,serif;overflow-x:clip;
+background-image:radial-gradient(ellipse at 50% -10%,light-dark(#ffffffaa,#6b223455),transparent 60%),radial-gradient(ellipse at 50% 110%,light-dark(#e9c9c2,#1a080e),transparent 60%)}
+main{min-height:100%;display:grid;place-items:center;padding:clamp(16px,4vw,48px) max(4vw,12px)}
+.card{position:relative;width:min(720px,100%);background:var(--card);border-radius:6px;padding:clamp(28px,5vw,56px) clamp(18px,5vw,56px) clamp(28px,4vw,44px);text-align:center;
+box-shadow:0 30px 80px -30px light-dark(#6b223455,#000c),0 2px 0 light-dark(#fff,#ffffff10) inset}
+.card::before,.card::after{content:"";position:absolute;pointer-events:none;border:1px solid var(--gold);border-radius:3px}
+.card::before{inset:12px;opacity:.7}.card::after{inset:17px;opacity:.35}
+.wreath{position:relative;width:min(440px,100%);aspect-ratio:1;margin:0 auto}
+.wreath svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.names{position:absolute;inset:0;display:grid;place-content:center;gap:0;padding:18%}
+.ar{font-family:"Aref Ruqaa",serif;font-size:clamp(22px,5vw,30px);color:var(--gold);line-height:1.2;direction:rtl;margin:0 0 4px}
+h1{margin:0;font:400 clamp(40px,10vw,68px)/1.05 "Pinyon Script",cursive;color:var(--ink);text-wrap:balance}
+h1 .amp{display:block;font-size:.6em;color:var(--gold);line-height:1.1}
+.invite{margin:clamp(14px,3vw,22px) 0 2px;font-style:italic;color:var(--soft);font-size:18px}
+.date{margin:0;font-size:clamp(22px,4.4vw,30px);font-weight:500;letter-spacing:.02em}
+.date small{display:block;font-size:17px;color:var(--soft);font-weight:400;letter-spacing:0}
+.rule{display:block;width:140px;height:14px;margin:18px auto}
+.count{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(4px,1.6vw,14px);max-width:600px;margin:0 auto}
+.unit{padding:clamp(10px,2.4vw,16px) 4px;border-top:1px solid color-mix(in srgb,var(--gold) 55%,transparent);border-bottom:1px solid color-mix(in srgb,var(--gold) 55%,transparent)}
+.num{display:block;font:500 clamp(28px,7.6vw,54px)/1 "Cormorant Garamond",serif;font-variant-numeric:tabular-nums lining-nums;color:var(--ink)}
+.lbl{display:block;margin-top:6px;font-size:15px;color:var(--soft)}
+.lbl .a{display:block;font-family:"Aref Ruqaa",serif;font-size:14px;color:var(--gold)}
+.done{display:none;font:400 clamp(34px,8vw,52px)/1.1 "Pinyon Script",cursive;color:var(--wine);margin:8px 0}
+:root[data-theme=dark] .done{color:var(--rose)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .done{color:var(--rose)}}
+.is-done .count{display:none}.is-done .done{display:block}
+.foot{margin:22px 0 0;font-size:16px;color:var(--soft)}
+.foot .ar{font-size:20px;margin:6px 0 0}
+.petals{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.petals i{position:absolute;top:-30px;width:12px;height:16px;border-radius:70% 0 70% 0;background:var(--rose);opacity:.55;animation:fall linear infinite}
+main{position:relative;z-index:1}
+@keyframes fall{to{transform:translate3d(var(--dx),110vh,0) rotate(540deg)}}
+.tick{animation:pop .5s ease}
+@keyframes pop{0%{opacity:.35;transform:translateY(-3px)}100%{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.petals{display:none}.tick{animation:none}}
+@media (max-width:600px){.names{padding:17%}.lbl{font-size:13px}.lbl .a{font-size:13px}}
+</style>
+</head>
+<body>
+<div class="petals" aria-hidden="true"></div>
+<main>
+<article class="card" id="card">
+  <div class="wreath">
+    <svg viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <linearGradient id="lf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--leaf)" stop-opacity=".95"/><stop offset="1" stop-color="var(--leaf)" stop-opacity=".6"/></linearGradient>
+        <radialGradient id="rs" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="var(--rose)"/><stop offset="1" stop-color="var(--wine)"/></radialGradient>
+        <path id="leaf" d="M0 0 C6 -9 18 -10 26 0 C18 10 6 9 0 0Z"/>
+        <g id="rose">
+          <circle r="15" fill="url(#rs)"/>
+          <path d="M-9 -2 C-6 -11 6 -11 9 -3 C6 4 -4 6 -9 -2Z M-5 3 C-1 -4 6 -2 6 3 C3 8 -3 8 -5 3Z" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.2"/>
+        </g>
+      </defs>
+      <circle cx="200" cy="200" r="170" fill="none" stroke="var(--gold)" stroke-width="1" opacity=".55"/>
+      <circle cx="200" cy="200" r="163" fill="none" stroke="var(--gold)" stroke-width=".6" opacity=".35" stroke-dasharray="2 5"/>
+      <g id="leaves"></g>
+      <g id="roses"></g>
+    </svg>
+    <div class="names">
+      <p class="ar" lang="ar">بيسان و محمد</p>
+      <h1>Bisan <span class="amp">&amp;</span> Mohammad</h1>
+    </div>
+  </div>
+
+  <p class="invite">are getting married</p>
+  <p class="date">30 April 2027<small>Friday · الجمعة ٣٠ نيسان ٢٠٢٧</small></p>
+
+  <svg class="rule" viewBox="0 0 140 14" aria-hidden="true">
+    <path d="M0 7H56M84 7H140" stroke="var(--gold)" stroke-width="1"/>
+    <path d="M70 1 L76 7 L70 13 L64 7Z" fill="none" stroke="var(--gold)"/>
+    <circle cx="70" cy="7" r="1.6" fill="var(--gold)"/>
+  </svg>
+
+  <div class="count" role="timer" aria-live="off" aria-label="Countdown to the wedding">
+    <div class="unit"><span class="num" id="mo">—</span><span class="lbl">Months<span class="a" lang="ar">شهر</span></span></div>
+    <div class="unit"><span class="num" id="d">—</span><span class="lbl">Days<span class="a" lang="ar">يوم</span></span></div>
+    <div class="unit"><span class="num" id="h">—</span><span class="lbl">Hours<span class="a" lang="ar">ساعة</span></span></div>
+    <div class="unit"><span class="num" id="m">—</span><span class="lbl">Minutes<span class="a" lang="ar">دقيقة</span></span></div>
+    <div class="unit"><span class="num" id="s">—</span><span class="lbl">Seconds<span class="a" lang="ar">ثانية</span></span></div>
+  </div>
+  <p class="done" id="done">Today is the day!</p>
+
+  <p class="foot">Counting every moment until forever begins
+    <span class="ar" lang="ar">بالرفاه والبنين</span></p>
+</article>
+</main>
+<script>
+{
+  const NS = "http://www.w3.org/2000/svg";
+  const leaves = document.getElementById("leaves"), roses = document.getElementById("roses");
+  // olive leaves around the ring, leaving gaps at top and bottom for roses
+  let L = "";
+  for (let i = 0; i < 44; i++) {
+    const a = (i / 44) * 360;
+    if ((a > 345 || a < 15) || (a > 165 && a < 195)) continue;
+    const r = 170 + (i % 2 ? 6 : -6);
+    const rot = a + (i % 2 ? 125 : 55);
+    const s = 0.9 + (i % 3) * 0.12;
+    L += `<use href="#leaf" fill="url(#lf)" transform="rotate(${a} 200 200) translate(200 ${200 - r}) rotate(${rot - a}) scale(${s})"/>`;
+  }
+  leaves.innerHTML = L;
+  const rosePos = [[0, 1.15], [-12, .8], [12, .8], [180, 1.05], [168, .75], [192, .75]];
+  roses.innerHTML = rosePos.map(([a, s]) => `<use href="#rose" transform="rotate(${a} 200 200) translate(200 30) rotate(${-a}) scale(${s})"/>`).join("");
+
+  // falling petals
+  const P = document.querySelector(".petals");
+  let ph = "";
+  for (let i = 0; i < 18; i++) {
+    const left = Math.random() * 100, dur = 9 + Math.random() * 10, delay = -Math.random() * 18;
+    const dx = (Math.random() * 160 - 80).toFixed(0) + "px", sc = (0.6 + Math.random() * 0.8).toFixed(2);
+    ph += `<i style="left:${left}%;animation-duration:${dur}s;animation-delay:${delay}s;--dx:${dx};scale:${sc}"></i>`;
+  }
+  P.innerHTML = ph;
+
+  // countdown — midnight, 30 April 2027, Palestine time (UTC+3 in summer)
+  const target = new Date("2027-04-30T00:00:00+03:00").getTime();
+  const el = { mo: document.getElementById("mo"), d: document.getElementById("d"), h: document.getElementById("h"), m: document.getElementById("m"), s: document.getElementById("s") };
+  const card = document.getElementById("card");
+  const prev = {};
+  const set = (k, v) => {
+    if (prev[k] === v) return;
+    prev[k] = v;
+    el[k].textContent = v;
+    el[k].classList.remove("tick"); void el[k].offsetWidth; el[k].classList.add("tick");
+  };
+  const tick = () => {
+    const now = Date.now();
+    if (target - now <= 0) { card.classList.add("is-done"); clearInterval(timer); return; }
+    // whole calendar months first, then the remainder in days/hours/minutes/seconds
+    const addMonths = (t, n) => {
+      const d = new Date(t), day = d.getDate();
+      d.setDate(1); d.setMonth(d.getMonth() + n);
+      d.setDate(Math.min(day, new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate()));
+      return d.getTime();
+    };
+    let months = 0;
+    while (addMonths(now, months + 1) <= target) months++;
+    const sec = Math.floor((target - addMonths(now, months)) / 1000);
+    set("mo", String(months));
+    set("d", String(Math.floor(sec / 86400)));
+    set("h", String(Math.floor(sec % 86400 / 3600)).padStart(2, "0"));
+    set("m", String(Math.floor(sec % 3600 / 60)).padStart(2, "0"));
+    set("s", String(sec % 60).padStart(2, "0"));
+  };
+  const timer = setInterval(tick, 1000);
+  tick();
+}
+</script>
+</body>
+</html>
